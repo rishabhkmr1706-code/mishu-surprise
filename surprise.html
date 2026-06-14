@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Love ❤️</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{height:100vh;overflow:hidden;background:linear-gradient(135deg,#ffd6e7,#fff5f7);display:flex;justify-content:center;align-items:center}
+.mainPage{width:100%;height:100vh;display:flex;justify-content:center;align-items:center;padding:20px}
+.card{background:white;width:100%;max-width:720px;padding:40px;border-radius:30px;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.15);animation:float 4s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-10px)}}
+h1{color:#ff4d6d;margin-bottom:20px}
+.message{font-size:1.1rem;line-height:1.8;color:#444}
+.ring{font-size:75px;margin:25px 0;position:relative;display:inline-block;animation:ringRotate 4s ease-in-out infinite}
+@keyframes ringRotate{25%{transform:rotate(-10deg)}75%{transform:rotate(10deg)}}
+.sparkle{position:absolute;top:-10px;right:-15px;animation:sparkle 1.5s infinite}
+@keyframes sparkle{50%{opacity:1;transform:scale(1.4)}0%,100%{opacity:0;transform:scale(.5)}}
+.buttons{margin-top:25px;display:flex;flex-direction:column;gap:15px}
+button{padding:15px;border:none;border-radius:50px;font-size:1rem;cursor:pointer;transition:.3s}
+button:hover{transform:scale(1.05)}
+.yes{background:#ff4d6d;color:white}.no{background:#ffe5ec;color:#ff4d6d}
+#effects{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:999}
+.floating{position:absolute;animation:rise 5s linear forwards}
+@keyframes rise{from{transform:translateY(110vh);opacity:1}to{transform:translateY(-150px);opacity:0}}
+#popupMessage{position:fixed;top:15%;left:50%;transform:translateX(-50%);background:white;padding:18px 28px;border-radius:25px;color:#ff4d6d;font-weight:bold;display:none;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.15);z-index:1000}
+.letterPage,#finalPage{position:fixed;inset:0;display:none;justify-content:center;align-items:center;padding:20px;z-index:1001}
+.letterPage{background:rgba(0,0,0,.85)}
+.letter,.finalCard{background:#fffdf8;max-width:760px;width:100%;padding:35px;border-radius:25px;box-shadow:0 0 40px rgba(255,255,255,.2);text-align:center}
+.riddle{line-height:2;font-size:1.1rem}
+.loveNote{margin-top:20px;color:#ff4d6d;font-weight:bold;font-size:1.2rem;min-height:40px}
+#finalPage{background:linear-gradient(135deg,#ffd6e7,#fff5f7);overflow:auto}
+</style>
+</head>
+<body>
+<div class="mainPage">
+<div class="card">
+<h1>❤️ You & Me ❤️</h1>
+<div class="message">
+Finally, you have reached here... ❤️<br><br>
+For the next gift, my love, you will have to accept the proposal.<br><br>
+Here is the ring 💍<br><br>
+<b>So tell me... Do you love me?</b>
+</div>
+<div class="ring">💍<div class="sparkle">✨</div></div>
+<div class="buttons">
+<button class="yes" onclick="yesClicked()">Yes ❤️ Now Show Me The Next Gift</button>
+<button class="no" onclick="noClicked()">Hmm... No 😏 But I Want To See The Next Gift</button>
+</div>
+</div>
+</div>
+
+<div id="effects"></div>
+<div id="popupMessage"></div>
+
+<div class="letterPage" id="letterPage">
+<div class="letter">
+<h2>📜 Your Next Clue</h2>
+<div class="riddle">
+Jeb ka raaz hoon, chhota sa ghar,<br>
+Roz rehta hoon tumhare saath har pahar.<br><br>
+Paison ki hifazat mera kaam maana jaata hai,<br>
+Par aaj ek anmol chehra mere andar muskurata hai.<br><br>
+Batao kaun hoon main? ❤️
+<div class="loveNote" id="loveNote"></div>
+<br>
+<button class="yes" onclick="showFinalPage()">I Solved It ❤️</button>
+</div>
+</div>
+</div>
+
+<div id="finalPage">
+<div class="finalCard">
+<h1>❤️ Reasons Why I Love You ❤️</h1><br>
+<p>You make ordinary days special.</p><br>
+<p>You are my favourite notification.</p><br>
+<p>You understand me even when I don't say anything.</p><br>
+<p>You make me laugh.</p><br>
+<p>You make me want to become a better person.</p><br>
+<h2 style="color:#ff4d6d">Every clue led you to a gift, but every day with you feels like the real gift ❤️</h2>
+<br><h1>💖 I LOVE YOU 💖</h1>
+<p style="margin-top:30px;color:#888;font-style:italic">Directed by: The boy who loves you endlessly ❤️</p>
+</div>
+</div>
+
+<script>
+function createFloating(symbol,count,min,max){
+ let e=document.getElementById("effects");
+ for(let i=0;i<count;i++){
+  setTimeout(()=>{
+   let d=document.createElement("div");
+   d.className="floating"; d.innerHTML=symbol;
+   d.style.left=Math.random()*100+"vw";
+   d.style.fontSize=(min+Math.random()*max)+"px";
+   e.appendChild(d); setTimeout(()=>d.remove(),5000);
+  },i*80);
+ }
+}
+function megaLoveBurst(){
+ ["❤️","🌹","✨","💖","💕"].forEach(s=>createFloating(s,20,20,25));
+}
+function typeLoveMessage(){
+ let txt="💌 I love you so so so so so much, my sweetheart ❤️";
+ let i=0,t=document.getElementById("loveNote"); t.innerHTML="";
+ let iv=setInterval(()=>{t.innerHTML+=txt.charAt(i++); if(i>=txt.length) clearInterval(iv)},60);
+}
+function openLetter(){
+ document.getElementById("letterPage").style.display="flex";
+ setTimeout(typeLoveMessage,300);
+}
+function yesClicked(){
+ let p=document.getElementById("popupMessage");
+ p.innerHTML="🥺❤️<br>Awwww... I knew it!<br>You just made my day sweetheart ❤️";
+ p.style.display="block";
+ createFloating("❤️",40,25,20); createFloating("🌹",25,25,20);
+ createFloating("🌸",25,25,20); createFloating("🧸",15,30,20); createFloating("✨",30,20,15);
+ megaLoveBurst();
+ setTimeout(()=>{p.style.display="none"; openLetter();},3500);
+}
+function noClicked(){
+ let p=document.getElementById("popupMessage");
+ p.innerHTML="🥺<br>Boss, I know you love me ❤️<br>You're just teasing me 😏";
+ p.style.display="block";
+ createFloating("🥺",25,25,20); createFloating("😭",20,25,20); createFloating("💔",25,25,20);
+ setTimeout(()=>{p.style.display="none"; openLetter();},3500);
+}
+function showFinalPage(){
+ document.getElementById("finalPage").style.display="flex";
+ megaLoveBurst();
+}
+</script>
+</body>
+</html>
